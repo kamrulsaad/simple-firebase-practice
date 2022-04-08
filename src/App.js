@@ -51,7 +51,7 @@ function App() {
   return (
     <div className="App">
       <Form></Form>
-      {user.uid ? (
+      {/* {user.uid ? (
         <button onClick={handleSignOut}>Sign Out</button>
       ) : (
         <div style={{textAlign: 'center'}}>
@@ -103,7 +103,7 @@ function App() {
         </div>
       )}
       <h1>{user.displayName}</h1>
-      <img style={{ borderRadius: "50%" }} src={user.photoURL} alt="" />
+      <img style={{ borderRadius: "50%" }} src={user.photoURL} alt="" /> */}
     </div>
   );
 }
