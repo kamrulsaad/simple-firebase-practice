@@ -1,6 +1,7 @@
 import "./App.css";
 import app from "./firebase.init";
 import {
+  FacebookAuthProvider,
   getAuth,
   GithubAuthProvider,
   GoogleAuthProvider,
@@ -17,6 +18,7 @@ function App() {
 
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
+  const facebookProvider = new FacebookAuthProvider();
 
   const githubSignIn = () => {
     signInWithPopup(auth, githubProvider)
@@ -27,6 +29,12 @@ function App() {
         console.error(error);
       });
   };
+
+  const handleFacebookSignIn = () => {
+    signInWithPopup(auth, facebookProvider)
+    .then(res => setUser(res.user))
+    .catch(error => console.log(error))
+  }
 
   const googleSIgnIn = () => {
     signInWithPopup(auth, googleProvider)
@@ -51,17 +59,17 @@ function App() {
   return (
     <div className="App">
       <Form></Form>
-      {/* {user.uid ? (
+      {user.uid ? (
         <button onClick={handleSignOut}>Sign Out</button>
       ) : (
-        <div style={{textAlign: 'center'}}>
+        <div style={{ textAlign: "center" }}>
           <button
             type="button"
             onClick={googleSIgnIn}
-            class="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2 my-2"
+            className="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2 my-2"
           >
             <svg
-              class="w-4 h-4 mr-2 -ml-1"
+              className="w-4 h-4 mr-2 -ml-1"
               aria-hidden="true"
               focusable="false"
               data-prefix="fab"
@@ -79,12 +87,12 @@ function App() {
           </button>
           <br />
           <button
-          onClick={githubSignIn}
+            onClick={githubSignIn}
             type="button"
-            class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+            className="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
           >
             <svg
-              class="w-4 h-4 mr-2 -ml-1"
+              className="w-4 h-4 mr-2 -ml-1"
               aria-hidden="true"
               focusable="false"
               data-prefix="fab"
@@ -100,10 +108,33 @@ function App() {
             </svg>
             Sign in with Github
           </button>
+          <br />
+          <button
+            onClick={handleFacebookSignIn}
+            type="button"
+            className="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 mr-2 mb-2"
+          >
+            <svg
+              className="w-4 h-4 mr-2 -ml-1"
+              aria-hidden="true"
+              focusable="false"
+              data-prefix="fab"
+              data-icon="facebook-f"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 320 512"
+            >
+              <path
+                fill="currentColor"
+                d="M279.1 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.4 0 225.4 0c-73.22 0-121.1 44.38-121.1 124.7v70.62H22.89V288h81.39v224h100.2V288z"
+              ></path>
+            </svg>
+            Sign in with Facebook
+          </button>
         </div>
       )}
       <h1>{user.displayName}</h1>
-      <img style={{ borderRadius: "50%" }} src={user.photoURL} alt="" /> */}
+      <img style={{ borderRadius: "50%" }} src={user.photoURL} alt="" />
     </div>
   );
 }
